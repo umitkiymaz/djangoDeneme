@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Site Başlığı{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <h1><a href="{% url 'anasayfa' %}">📝 Blog Sitesi</a></h1>
+        <nav>
+            {% if user.is_authenticated %}
+                Merhaba <strong>{{ user.username }}</strong> | 
+                <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Çıkış</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Giriş Yap</a>
+            {% endif %}
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <hr>
+        <p>&copy; 2025 Blog Sitesi</p>
+    </footer>
+
+</body>
+</html>

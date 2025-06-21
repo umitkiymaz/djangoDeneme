@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Yazıyı Sil{% endblock %}
+
+{% block content %}
+    <h1>Yeni Yazı Ekle</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Kaydet</button>
+    </form>
+    <a href="{% url 'anasayfa' %}">Ana Sayfa</a>
+{% endblock %}

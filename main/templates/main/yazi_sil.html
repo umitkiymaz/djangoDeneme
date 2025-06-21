@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Yazıyı Sil{% endblock %}
+
+{% block content %}
+    <h2>Bu yazıyı silmek istediğine emin misin?</h2>
+    <p><strong>{{ yazi.baslik }}</strong></p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Evet, sil</button>
+        <a href="{% url 'anasayfa' %}">Hayır, geri dön</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Ana Sayfa{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <p>Hoş geldin, {{ user.username }}!</p>
+        <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Çıkış Yap</button>
+        </form>
+
+    {% else %}
+        <a href="{% url 'login' %}">Giriş Yap</a>
+    {% endif %}
+
+    <h2>Yazılar</h2>
+    {% for yazi in yazilar %}
+        <div>
+            <h3>{{ yazi.baslik }}</h3>
+            <p>{{ yazi.icerik }}</p>
+            <small>{{ yazi.yayin_tarihi }}</small><br>
+            <a href="{% url 'yazi_duzenle' yazi.pk %}">Düzenle</a> |
+            <a href="{% url 'yazi_sil' yazi.pk %}">Sil</a>
+            <hr>
+        </div>
+    {% empty %}
+        <p>Henüz yazı yok.</p>
+    {% endfor %}
+{% endblock %}
+
+
+
