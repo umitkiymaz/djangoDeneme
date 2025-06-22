@@ -1,12 +1,59 @@
-{% extends 'main/base.html' %}
+{% extends 'main/blank.html' %}
+{% load static %}
+{% load extra_filters %}
 
-{% block title %}Giriş Yap{% endblock %}
+{% block title %}Giriş Yap | Panelio{% endblock %}
 
 {% block content %}
-    <h2>Giriş Yap</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Giriş</button>
+<style>
+  .full-center-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+  }
+  .login-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 16px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  .login-box img.logo {
+    /*width: 64px;*/
+    height: 150px;
+    margin-bottom: 1rem;
+  }
+</style>
+
+<div class="full-center-wrapper">
+  <div class="login-box">
+    <a href="{% url 'anasayfa' %}" class="logo"><img src="{% static 'main/images/logo.png' %}" alt="Panelio" class="logo"></a>
+    <h2 class="mb-4">Giriş Yap</h2>
+
+    {% if form.errors %}
+      <div class="alert alert-danger">Giriş bilgileriniz hatalı. Lütfen tekrar deneyin.</div>
+    {% endif %}
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <div class="mb-3 text-start">
+        {{ form.username.label_tag }}
+        {{ form.username|add_class:"form-control" }}
+      </div>
+      <div class="mb-3 text-start">
+        {{ form.password.label_tag }}
+        {{ form.password|add_class:"form-control" }}
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
     </form>
+
+    <div class="text-center mt-3">
+      <a href="{% url 'login' %}">Şifremi unuttum</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

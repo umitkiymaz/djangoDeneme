@@ -4,6 +4,7 @@ from .forms import PostForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 
+@login_required
 def anasayfa(request):
     yazilar = Post.objects.all().order_by('-yayin_tarihi')
     return render(request, 'main/anasayfa.html', {'yazilar': yazilar})
