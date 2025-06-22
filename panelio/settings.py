@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-jzo%%6y)n_97gy99tthy&w20)mf3x+4u1u&qk!)mm&iw7u$do^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['nalizrapor.com.tr','www.analizrapor.com.tr']
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
